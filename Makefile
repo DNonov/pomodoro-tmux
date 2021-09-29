@@ -4,5 +4,5 @@ install:
 	@echo "Python install"
 
 test:
-	@python -B -m unittest discover
+	@pytest
 
