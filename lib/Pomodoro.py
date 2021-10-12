@@ -6,7 +6,7 @@ class Pomodoro():
     two sessions 'work' and 'rest'. There are three methods that will map
     directly to the server's urls.
     """
-    def __init__(self, work_time_minutes=25, rest_time_minutes=5):
+    def __init__(self, work_time_seconds = 1500, rest_time_seconds=300):
         self.work_start_time_point = None
         self.work_end_time_point = None
         self.rest_start_time_point = None
@@ -14,8 +14,8 @@ class Pomodoro():
         self.last_active_session = None
         self.alarm_counter = 0
 
-        self.work_time = timedelta(minutes=work_time_minutes)
-        self.rest_time = timedelta(minutes=rest_time_minutes)
+        self.work_time = timedelta(seconds=work_time_seconds)
+        self.rest_time = timedelta(seconds=rest_time_seconds)
 
     def reset_work_time_points(self):
         """ Reset work time points on the end of the rest session. """

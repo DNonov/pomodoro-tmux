@@ -1,5 +1,6 @@
+import time
+
 from lib.Pomodoro import Pomodoro
-from datetime import datetime, timedelta
 
 def test_if_end_of_work_is_setted_on_start():
     p = Pomodoro()
@@ -37,3 +38,34 @@ def test_status_return_no_active_session():
     p = Pomodoro()
 
     assert p.status() == "No active session!"
+
+def test_after_end_of_work_session_display_right_message():
+    p = Pomodoro(work_time_seconds=1)
+    p.start_work()
+
+    time.sleep(1)
+
+    assert p.status() == "Work session finished!"
+
+def test_after_end_of_rest_session_display_right_message():
+    p = Pomodoro(rest_time_seconds=1)
+    p.start_rest()
+
+    time.sleep(1)
+
+    assert p.status() == "Rest session finished!"
+
+def test_whole_pomodoro_with_work_and_rest_sessions():
+    p = Pomodoro(work_time_seconds=1, rest_time_seconds=1)
+
+    p.start_work()
+    time.sleep(1)
+    assert p.status() == "Work session finished!"
+
+    p.start_rest()
+    time.sleep(1)
+    assert p.status() == "Rest session finished!"
+
+    p.start_work()
+    time.sleep(1)
+    assert p.status() == "Work session finished!"
