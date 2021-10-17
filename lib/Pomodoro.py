@@ -87,12 +87,10 @@ class Pomodoro():
 
         if self.last_active_session == "work":
             if self.alarm_counter < 5:
-                print("\a")
                 self.alarm_counter += 1
             return "Work session finished!"
 
         if self.last_active_session == "rest":
             if self.alarm_counter < 5:
-                print("\a")
                 self.alarm_counter += 1
             return "Rest session finished!"
