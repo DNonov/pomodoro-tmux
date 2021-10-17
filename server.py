@@ -1,38 +1,37 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
-from lib.Pomodoro import Pomodoro
-import time
+import sys, time
+from http.server import HTTPServer
 
-host_name = "localhost"
-server_port = 9876
-pomodoro = Pomodoro()
+from lib.Daemon import Daemon
+from lib.RequestHandler import RequestHandler
 
-class PomodoroServer(BaseHTTPRequestHandler):
-    def response(self, payload):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(bytes(f'{payload}', "utf-8"))
+HOST_NAME = "localhost"
+SERVER_PORT = 9876
 
-    def do_GET(self):
-        if self.path == "/status":
-            self.response(pomodoro.status())
 
-        if self.path == "/start-work":
-            pomodoro.start_work()
-            self.response('Work started')
+class PomodoroDaemon(Daemon):
+    def run(self):
+        web_server = HTTPServer((HOST_NAME, SERVER_PORT), RequestHandler)
+        web_server.serve_forever()
 
-        if self.path == "/start-rest":
-            pomodoro.start_rest()
-            self.response("Rest started")
 
 if __name__ == "__main__":
-    web_server = HTTPServer((host_name, server_port), PomodoroServer)
-    print("Server started http://%s:%s" % (host_name, server_port))
+    daemon = PomodoroDaemon("/tmp/deamon-pomodoro.pid")
 
-    try:
-        web_server.serve_forever()
-    except KeyboardInterrupt:
-        pass
+    if len(sys.argv) == 2:
+        if "start" == sys.argv[1]:
+            daemon.start()
 
-    web_server.server_close()
-    print("Server stopped")
+        elif "stop" == sys.argv[1]:
+            daemon.stop()
+
+        elif "restart" == sys.argv[1]:
+            daemon.restart()
+
+        else:
+            print("Unknown commant")
+            sys.exit(2)
+        sys.exit(0)
+
+    else:
+        print("usage: %s start|stop|restart" % sys.argv[0])
+        sys.exit(2)
