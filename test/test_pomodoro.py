@@ -37,7 +37,7 @@ def test_if_reset_time_points_are_reset_after_start_work_call():
 def test_if_status_return_no_active_session():
     p = Pomodoro()
 
-    assert p.status() == "No active session!"
+    assert p.status() == ""
 
 def test_if_after_end_of_work_session_display_correct_message():
     p = Pomodoro(work_time_seconds=1)

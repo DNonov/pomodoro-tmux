@@ -9,8 +9,10 @@ class Pomodoro():
     def __init__(self, work_time_seconds = 1500, rest_time_seconds=300):
         self.work_start_time_point = None
         self.work_end_time_point = None
+
         self.rest_start_time_point = None
         self.rest_end_time_point = None
+
         self.last_active_session = None
         self.alarm_counter = 0
 
@@ -81,7 +83,7 @@ class Pomodoro():
             return f"Rest: {(time.seconds//60):02}:{(time.seconds % 60):02}"
 
         if self.last_active_session is None:
-            return "No active session!"
+            return ""
 
         if self.last_active_session == "work":
             if self.alarm_counter < 5:
