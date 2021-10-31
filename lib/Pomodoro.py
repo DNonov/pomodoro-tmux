@@ -14,6 +14,7 @@ class Pomodoro():
         self.rest_end_time_point = None
 
         self.last_active_session = None
+        self.attempt_for_second_session_in_row = None
 
         self.work_time = timedelta(seconds=work_time_seconds)
         self.rest_time = timedelta(seconds=rest_time_seconds)
@@ -49,6 +50,9 @@ class Pomodoro():
     def start_work(self):
         """ Start work session. """
 
+        if self.last_active_session == "work":
+            self.attempt_for_second_session_in_row = True
+
         self.work_start_time_point = datetime.now()
         self.work_end_time_point = \
             self.work_start_time_point + self.work_time
@@ -83,7 +87,10 @@ class Pomodoro():
             return ""
 
         if self.last_active_session == "work":
-            return "Work session finished!"
+            if self.attempt_for_second_session_in_row:
+                return "Have to rest!"
+            else:
+                return "Work session finished!"
 
         if self.last_active_session == "rest":
             return "Rest session finished!"

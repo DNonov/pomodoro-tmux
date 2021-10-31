@@ -69,3 +69,12 @@ def test_whole_pomodoro_with_work_and_rest_sessions():
     p.start_work()
     time.sleep(1)
     assert p.status() == "Work session finished!"
+
+def test_cannot_run_work_session_twice_without_run_rest_session():
+    p = Pomodoro(work_time_seconds=1, rest_time_seconds=1)
+
+    p.start_work()
+    time.sleep(2)
+    p.start_work()
+    time.sleep(1)
+    assert p.status() == "Have to rest!"
