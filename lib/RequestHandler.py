@@ -1,7 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from lib.Pomodoro import Pomodoro
+from lib.Alarm import Alarm
 
-pomodoro = Pomodoro()
+alarm = Alarm()
+pomodoro = Pomodoro(alarm)
 
 class RequestHandler(BaseHTTPRequestHandler):
     def response(self, payload):

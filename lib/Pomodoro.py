@@ -6,7 +6,7 @@ class Pomodoro():
     two sessions 'work' and 'rest'. There are three methods that will map
     directly to the server's urls.
     """
-    def __init__(self, work_time_seconds = 1500, rest_time_seconds=300):
+    def __init__(self, alarm, work_time_seconds = 1500, rest_time_seconds=300):
         self.work_start_time_point = None
         self.work_end_time_point = None
 
@@ -15,6 +15,8 @@ class Pomodoro():
 
         self.last_active_session = None
         self.attempt_for_second_session_in_row = None
+
+        self.alarm = alarm
 
         self.work_time = timedelta(seconds=work_time_seconds)
         self.rest_time = timedelta(seconds=rest_time_seconds)
@@ -52,26 +54,28 @@ class Pomodoro():
 
         if self.last_active_session == "work":
             self.attempt_for_second_session_in_row = True
-
-        self.work_start_time_point = datetime.now()
-        self.work_end_time_point = \
-            self.work_start_time_point + self.work_time
+        else:
+            self.work_start_time_point = datetime.now()
+            self.work_end_time_point = \
+                self.work_start_time_point + self.work_time
 
         self.reset_rest_time_points()
         self.last_active_session = "work"
+        self.alarm.counter = 0
 
     def start_rest(self):
         """ Start rest session. """
 
         if self.last_active_session == "rest":
             self.attempt_for_second_session_in_row = True
-
-        self.rest_start_time_point = datetime.now()
-        self.rest_end_time_point = \
-            self.rest_start_time_point + self.rest_time
+        else:
+            self.rest_start_time_point = datetime.now()
+            self.rest_end_time_point = \
+                self.rest_start_time_point + self.rest_time
 
         self.reset_work_time_points()
         self.last_active_session = "rest"
+        self.alarm.counter = 0
 
     def status(self):
         """ Return the time remaining of a session. """
@@ -91,12 +95,15 @@ class Pomodoro():
 
         if self.last_active_session == "work":
             if self.attempt_for_second_session_in_row:
-                return "Have to rest!"
-            else:
                 return "Work session finished!"
+            else:
+                self.alarm.beep()
+                return "Work session finished!"
+
 
         if self.last_active_session == "rest":
             if self.attempt_for_second_session_in_row:
-                return "Have to work!"
+                return "Rest session finished!"
             else:
+                self.alarm.beep()
                 return "Rest session finished!"
