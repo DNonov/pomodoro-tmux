@@ -55,6 +55,7 @@ class Pomodoro():
         if self.last_active_session == "work":
             self.attempt_for_second_session_in_row = True
         else:
+            self.attempt_for_second_session_in_row = False
             self.work_start_time_point = datetime.now()
             self.work_end_time_point = \
                 self.work_start_time_point + self.work_time
@@ -69,6 +70,7 @@ class Pomodoro():
         if self.last_active_session == "rest":
             self.attempt_for_second_session_in_row = True
         else:
+            self.attempt_for_second_session_in_row = False
             self.rest_start_time_point = datetime.now()
             self.rest_end_time_point = \
                 self.rest_start_time_point + self.rest_time
