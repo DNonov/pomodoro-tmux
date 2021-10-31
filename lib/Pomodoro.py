@@ -14,7 +14,6 @@ class Pomodoro():
         self.rest_end_time_point = None
 
         self.last_active_session = None
-        self.alarm_counter = 0
 
         self.work_time = timedelta(seconds=work_time_seconds)
         self.rest_time = timedelta(seconds=rest_time_seconds)
@@ -56,7 +55,6 @@ class Pomodoro():
 
         self.reset_rest_time_points()
         self.last_active_session = "work"
-        self.alarm_counter = 0
 
     def start_rest(self):
         """ Start rest session. """
@@ -67,7 +65,6 @@ class Pomodoro():
 
         self.reset_work_time_points()
         self.last_active_session = "rest"
-        self.alarm_counter = 0
 
     def status(self):
         """ Return the time remaining of a session. """
@@ -86,11 +83,7 @@ class Pomodoro():
             return ""
 
         if self.last_active_session == "work":
-            if self.alarm_counter < 5:
-                self.alarm_counter += 1
             return "Work session finished!"
 
         if self.last_active_session == "rest":
-            if self.alarm_counter < 5:
-                self.alarm_counter += 1
             return "Rest session finished!"
