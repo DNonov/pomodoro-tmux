@@ -63,6 +63,9 @@ class Pomodoro():
     def start_rest(self):
         """ Start rest session. """
 
+        if self.last_active_session == "rest":
+            self.attempt_for_second_session_in_row = True
+
         self.rest_start_time_point = datetime.now()
         self.rest_end_time_point = \
             self.rest_start_time_point + self.rest_time
@@ -93,4 +96,7 @@ class Pomodoro():
                 return "Work session finished!"
 
         if self.last_active_session == "rest":
-            return "Rest session finished!"
+            if self.attempt_for_second_session_in_row:
+                return "Have to work!"
+            else:
+                return "Rest session finished!"
