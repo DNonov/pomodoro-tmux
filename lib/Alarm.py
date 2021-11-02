@@ -2,7 +2,7 @@ import os
 
 class Alarm():
     """
-    It notifies the user with a sound signal.
+    Makes sound notification.
 
     This is functional only on linux systems with 'sox' installed.
     """
@@ -11,7 +11,7 @@ class Alarm():
         self.alarm_comand = 'play -nq -t alsa synth 0.1 sine 170'
 
     def beep(self):
-        """ Creates sound signal """
+        """ Creates sound notification """
         if self.counter < 5:
             os.system(self.alarm_comand)
             self.counter += 1
