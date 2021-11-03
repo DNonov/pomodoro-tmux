@@ -10,13 +10,10 @@ sudo apt install sox
 ```
 
 ## Install
-
 ```
 git clone https://github.com/DNonov/pomodoro-tmux
 ./install.sh
 ```
-The above will clone the project to your machine and will execute the install
-script.
 
 ## Description
 This project consists of a daemon process running an HTTP server and a client
@@ -28,8 +25,11 @@ process is implemented via some Tmux settings.
 # Settings needed to operate with tmux-pomodoro
 set -g status-interval 1
 set -g status-right '#(curl localhost:9876/status)'
-bind w run-shell "curl localhost:9876/start-work > /dev/null"
-bind s run-shell "curl localhost:9876/start-rest > /dev/null"
+bind w run-shell 'curl localhost:9876/start-work > /dev/null'
+bind s run-shell 'curl localhost:9876/start-rest > /dev/null'
+bind u run-shell 'python3 ~/.pomodoro-tmux/server.py start'
+bind m run-shell 'python3 ~/.pomodoro-tmux/server.py stop'
+bind y run-shell 'python3 ~/.pomodoro-tmux/server.py restart'
 ```
 ### Contributing
 Bug reports and pull requests are always welcome.
