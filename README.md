@@ -22,6 +22,8 @@ printed on the Tmux's status line. The control over the server and the daemon
 process is implemented via some Tmux settings.
 
 ```bash
+# Add this in your tmux.conf
+
 # Settings needed to operate with tmux-pomodoro
 set -g status-interval 1
 set -g status-right '#(curl localhost:9876/status)'
