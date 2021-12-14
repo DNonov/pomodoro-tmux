@@ -1,4 +1,4 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 from lib.Pomodoro import Pomodoro
 from lib.Alarm import Alarm
 
