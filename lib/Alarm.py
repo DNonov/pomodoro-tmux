@@ -1,4 +1,5 @@
 import os
+from sys import platform
 
 class Alarm():
     """
@@ -8,11 +9,12 @@ class Alarm():
     """
     def __init__(self):
         self.counter = 0
-        self.alarm_comand = 'play -nq -t alsa synth 0.1 sine 170'
+        self.linux_alarm_comand = 'play -nq -t alsa synth 0.1 sine 170'
 
     def beep(self):
         """ Creates sound notification """
-        if self.counter < 5:
-            os.system(self.alarm_comand)
-            self.counter += 1
+        if platform == "linux" or platform == "linux2":
+            if self.counter < 5:
+                os.system(self.linux_alarm_comand)
+                self.counter += 1
 
