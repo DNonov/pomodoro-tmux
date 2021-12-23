@@ -11,7 +11,7 @@ class Alarm():
         self.counter = 0
         self.linux_alarm_comand = 'play -nq -t alsa synth 0.1 sine 170'
 
-    def beep(self):
+    def notify(self):
         """ Creates sound notification """
         if platform == "linux" or platform == "linux2":
             if self.counter < 5:

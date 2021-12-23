@@ -99,7 +99,7 @@ class Pomodoro():
             if self.attempt_for_second_session_in_row:
                 return "Work session finished!"
             else:
-                self.alarm.beep()
+                self.alarm.notify()
                 return "Work session finished!"
 
 
@@ -107,5 +107,5 @@ class Pomodoro():
             if self.attempt_for_second_session_in_row:
                 return "Rest session finished!"
             else:
-                self.alarm.beep()
+                self.alarm.notify()
                 return "Rest session finished!"
