@@ -20,6 +20,6 @@ bind w run-shell 'curl localhost:9876/start-work > /dev/null'
 bind s run-shell 'curl localhost:9876/start-rest > /dev/null'
 bind u run-shell 'python3 ~/.tmux-pomodoro/server.py start'
 bind m run-shell 'python3 ~/.tmux-pomodoro/server.py stop'
-bind l run-shell 'python3 ~/.tmux-pomodoro/server.py restart'
+bind y run-shell 'python3 ~/.tmux-pomodoro/server.py restart'
 "
 echo -e "$text" >> ~/tmux.conf
