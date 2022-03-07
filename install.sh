@@ -22,4 +22,4 @@ bind u run-shell 'python3 ~/.tmux-pomodoro/server.py start'
 bind m run-shell 'python3 ~/.tmux-pomodoro/server.py stop'
 bind y run-shell 'python3 ~/.tmux-pomodoro/server.py restart'
 "
-echo -e "$text" >> ~/tmux.conf
+echo -e "$text" >> ~/.tmux.conf
